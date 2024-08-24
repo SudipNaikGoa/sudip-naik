@@ -28,6 +28,29 @@
         h2 {
             color: #4CAF50;
         }
+        .greeting {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .collapsible {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f9f9f9;
+        }
         footer {
             text-align: center;
             padding: 10px;
@@ -43,6 +66,7 @@
     <header>
         <h1>Sudip Rajendra Naik</h1>
         <p>Assistant Professor of Mathematics, ADKSC Dodamarg</p>
+        <p class="greeting"></p>
     </header>
 
     <section>
@@ -57,17 +81,63 @@
 
     <section>
         <h2>Mathematics Syllabus</h2>
-        <p>Below is a comprehensive overview of the mathematics syllabus from 10th grade to MSc level:</p>
-        <ul>
-            <li><strong>10th Grade:</strong> Basic Algebra, Geometry, Trigonometry, Probability, Statistics.</li>
-            <li><strong>12th Grade:</strong> Advanced Algebra, Calculus, Vectors, Matrices, Differential Equations.</li>
-            <li><strong>BSc Mathematics:</strong> Linear Algebra, Real Analysis, Abstract Algebra, Complex Analysis, Differential Geometry, Numerical Methods.</li>
-            <li><strong>MSc Mathematics:</strong> Advanced Calculus, Topology, Functional Analysis, Number Theory, Partial Differential Equations, Mathematical Modelling.</li>
-        </ul>
+
+        <button class="collapsible">10th Grade</button>
+        <div class="content">
+            <p>Basic Algebra, Geometry, Trigonometry, Probability, Statistics.</p>
+        </div>
+
+        <button class="collapsible">12th Grade</button>
+        <div class="content">
+            <p>Advanced Algebra, Calculus, Vectors, Matrices, Differential Equations.</p>
+        </div>
+
+        <button class="collapsible">BSc Mathematics</button>
+        <div class="content">
+            <p>Linear Algebra, Real Analysis, Abstract Algebra, Complex Analysis, Differential Geometry, Numerical Methods.</p>
+        </div>
+
+        <button class="collapsible">MSc Mathematics</button>
+        <div class="content">
+            <p>Advanced Calculus, Topology, Functional Analysis, Number Theory, Partial Differential Equations, Mathematical Modelling.</p>
+        </div>
     </section>
 
     <footer>
         <p>&copy; 2024 Sudip Rajendra Naik. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Dynamic greeting based on the time of day
+        const greetingElement = document.querySelector('.greeting');
+        const currentHour = new Date().getHours();
+        let greetingMessage;
+
+        if (currentHour < 12) {
+            greetingMessage = 'Good Morning!';
+        } else if (currentHour < 18) {
+            greetingMessage = 'Good Afternoon!';
+        } else {
+            greetingMessage = 'Good Evening!';
+        }
+
+        greetingElement.textContent = greetingMessage;
+
+        // Collapsible sections for the syllabus
+        const collapsibles = document.querySelectorAll(".collapsible");
+
+        collapsibles.forEach(collapsible => {
+            collapsible.addEventListener("click", function() {
+                this.classList.toggle("active");
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
+
